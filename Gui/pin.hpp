@@ -17,6 +17,9 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
     {
+        Q_UNUSED(option);
+        Q_UNUSED(widget);
+
         QColor color;
 
         switch(m_state)

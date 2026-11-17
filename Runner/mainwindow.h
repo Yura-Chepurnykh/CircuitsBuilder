@@ -2,11 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "view.hpp"
-#include "scene.hpp"
-#include "gate.hpp"
-#include "and.hpp"
-#include <QVector>
+#include "create_gate_presenter.hpp"
+#include <QGraphicsView>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,9 +20,13 @@ public:
     ~MainWindow();
 
 private:
+    GateLifeCyclePresenter* m_gateLifeCyclePresenter;
     AGate* m_gate;
     QGraphicsView* m_view;
-    QGraphicsScene* m_scene;
+    Scene* m_scene;
+    CommandManager* m_manager;
+    Items* m_models;
+    Mapper* m_mapper;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

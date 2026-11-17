@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //m_gateLifeCyclePresenter = new GateLifeCyclePresenter();
+
     printf("Create mainwindow\n");
 
     QPen pen;
@@ -20,11 +22,20 @@ MainWindow::MainWindow(QWidget *parent)
     //inputs.append(p2);
     //inputs.append(p3);
 
-    AGate* andGate = new And(pen, inputs, 40.0, 50.0, 100.0, 100.0);
+    AGate* andGate = new And(1, pen, inputs, 40.0, 50.0, 100.0, 100.0);
     m_scene = new Scene();
     m_scene->addItem(p1);
     m_scene->addItem(andGate);
-    m_view = new View(m_scene);
+    m_view = new QGraphicsView(m_scene);
+    m_view->show();
+
+    m_scene->setSceneRect(0, 0, 1920, 1080);
+
+    m_models = new Items();
+    m_mapper = new Mapper();
+    m_manager = new CommandManager(*m_scene, *m_models);
+    m_gateLifeCyclePresenter = new GateLifeCyclePresenter(*m_scene, *m_models, *m_mapper, *m_manager);
+
     this->setCentralWidget(m_view);
 }
 
